@@ -1,8 +1,8 @@
 # FileMaker Server and Open Directory Integration #
 ## Directory Server Setup ##
 1. Purchase and Install Mountain Lion Server
-2. Run Mountain Lion Server
-3. Once the initial setup of server is setup, set the SSL certificate. You can either use the built-in certificate, or generate a CSR (Certificate Signing Request), and purchase a certificate from a third party.
+2. Run Mountain Lion Server.
+3. Once the initial setup of server is complete, set the SSL certificate. You can either use the built-in certificate, or generate a CSR (Certificate Signing Request) and purchase a certificate from a third party.
 4. Enable Open Directory.
 5. Setup Network Users and Groups
 
