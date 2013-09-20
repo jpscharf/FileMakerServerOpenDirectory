@@ -1,14 +1,18 @@
 # FileMaker Server + Open Directory #
 ## Single Machine Deployment ##
 
-FileMaker Server can be setup to authenticate against Active Directory and Open Directory. For those already using a Microsoft Server as a domain controller setup is little more than flipping a switch, while those on Mac only networks have to do a little more.
+FileMaker Pro Server can be setup to authenticate against Active Directory and Open Directory. For those already using a Microsoft Server as a domain controller setup is little more than flipping a switch, while those on Mac only networks have to do a little more.
 
-FileMaker Server and OpenDirectory can be integrated on either a single machine or across multiple machines. If you are following FileMaker Server best practices, the Open Directory and FileMaker server should be on separate machines. The directions for either deployment are the same, except for on the single-server deployment you got through all the steps on a single machine.
+FileMaker Pro Server and OpenDirectory can be integrated on either a single machine or across multiple machines. If you are following FileMaker Server best practices, Open Directory and FileMaker Pro Server should be installed on separate machines. The directions for either deployment are the same, except for on the single-machine deployment do all the steps on one machine.
 
-Requirements:
+### Caveat ###
+FileMaker Pro Server ***must*** be installed on a Mac, as Windows based PCs are not able to bind to a OpenDirectory domain. Windows clients will still be able to authenticate, as authentication is processed through FileMaker Server Pro.
+While this setup may be used in a mixed environment, Windows based PCs will not be able to bind to the OpenDirectory Controller, though FileMaker will still be able to use it for authentication.
+
+### Requirements ###
 * [Mac OS X Mountain Lion](https://itunes.apple.com/us/app/id537386512?mt=12) (other version may require a slightly different setup).
 * [OS X Server](https://itunes.apple.com/us/app/id537441259?mt=12)
-* [FileMaker Server](http://www.filemaker.com/products/filemaker-server/)
+* [FileMaker Pro Server 12](http://www.filemaker.com/products/filemaker-server/)
 
 ### Single Server Deployment ###
 1. Install/Upgrade Mountain Lion, if needed
