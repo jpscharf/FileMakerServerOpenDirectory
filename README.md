@@ -18,12 +18,12 @@ While this setup may be used in a mixed environment, Windows based PCs will not 
 1. Install Mountain Lion and update to the latest version. 
 2. Install OS X Server
 	* Purchase and download Mac OS X Server from the Mac App Store
-	* Open your Applications folder, and double-click Server to begin setup. [Screenshot: Setup-Server.png]
+	* Open your Applications folder, and double-click Server to begin setup. [Screenshot: Setup-Server.png]![Screenshot: Open Server](https://git.intergrated.net/fm-tricks/filemaker-opendirectory/raw/master/img/Setup-Server.png).	
 	* Step through Server setup wizard.		
 3. Setup SSL Certificate [Screenshot: Setup-SSL.png]
-	* You can either use the existing self-signed certificate.
-	* Or, you can use a third-party certificate, by clicking on the plus sign and generating a CSR for use with a truster SSL provider.
-	* For additional information regarding SSL Certificate setup – [OS X Server: Configuring clients to use SSL for Open Directory binding] (http://support.apple.com/kb/HT4183)
+	* Use the existing self-signed certificate.	
+		- ***OR***
+	* Use a third-party certificate, by clicking on the plus sign and generating a CSR for use with a truster SSL provider  – [OS X Server: Configuring clients to use SSL for Open Directory binding] (http://support.apple.com/kb/HT4183)
 	
 
 ## OpenDirectory Setup ##
