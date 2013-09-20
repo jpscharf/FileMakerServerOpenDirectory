@@ -56,7 +56,7 @@ While this setup may be used in a mixed environment, Windows based PCs will not 
 5. Select a Privilege Set.
 6. Repeat steps 2-5 for each group you want to have access.
 
--
+---
 
 1. *Recommended:* Install Mac OS X Server on all the machines used, though it is optional for the FileMaker Pro Server machine.
 2. ***Required:*** Complete these steps for each FileMaker Pro database you want to authenticate through OpenDirectory.
