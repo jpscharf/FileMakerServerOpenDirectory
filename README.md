@@ -13,8 +13,11 @@ While this setup may be used in a mixed environment, Windows based PCs will not 
 * [OS X Server](https://itunes.apple.com/us/app/id537441259?mt=12)
 * [FileMaker Pro Server 12](http://www.filemaker.com/products/filemaker-server/)
 
-## Mac OS X Server Setup ##
-#### You must complete these steps for each machine. ####
+## Mac OS X Server^1 ##
+>**OpenDirectory Server** ***(required)***
+
+>**FileMaker Pro Server** ***(optional)***
+
 1. Install Mountain Lion and update to the latest version. 
 2. Install OS X Server
 	* Purchase and download Mac OS X Server from the Mac App Store
@@ -44,8 +47,7 @@ While this setup may be used in a mixed environment, Windows based PCs will not 
 8. Click on **Network Account Server** and enter the name of the directory server.
 9. Reboot the machine.
 
-## FileMaker Pro File Setup ##
-#### You must complete these steps for each FileMaker Pro database you want to authenticate through OpenDirectory. ####
+## FileMaker Pro File Setup^2 ##
 
 1. Go to File -> Manage -> Security
 2. Click on **New** to create a new account.
@@ -53,3 +55,8 @@ While this setup may be used in a mixed environment, Windows based PCs will not 
 4. Enter an Open Directory Group.
 5. Select a Privilege Set.
 6. Repeat steps 2-5 for each group you want to have access.
+
+-
+
+1. *Recommended:* Install Mac OS X Server on all the machines used, though it is optional for the FileMaker Pro Server machine.
+2. ***Required:*** Complete these steps for each FileMaker Pro database you want to authenticate through OpenDirectory.
