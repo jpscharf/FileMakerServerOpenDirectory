@@ -18,7 +18,7 @@ While this setup may be used in a mixed environment, Windows based PCs will not 
 1. Install Mountain Lion and update to the latest version. 
 2. Install OS X Server
 	* Purchase and download Mac OS X Server from the Mac App Store
-	* Open your Applications folder, and double-click Server to begin setup. [Screenshot: Setup-Server.png]![Screenshot: Open Server](https://git.intergrated.net/fm-tricks/filemaker-opendirectory/raw/master/img/Setup-Server.png).	
+	* Open your Applications folder, and double-click Server to begin setup. [Screenshot: Setup-Server.png]	
 	* Step through Server setup wizard.		
 3. Setup SSL Certificate [Screenshot: Setup-SSL.png]
 	* Use the existing self-signed certificate.	
