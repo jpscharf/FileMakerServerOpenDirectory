@@ -23,13 +23,12 @@ FileMaker Pro Server ***must*** be installed on a Mac, as Windows based PCs are 
 2. If you are going to be using this machine as a Open Directory server, you will need to assign it a static IP and make sure it is using a reachable domain name.
 3. Install OS X Server
 	* Purchase and download Mac OS X Server from the Mac App Store
-	* Open your Applications folder, and double-click Server to begin setup.
-	
-	![Screenshot 1.1 - Mac OS X Server - Setup Server ](http://files.fmtricks.com/FileMaker-OpenDirectory/1.1 - Mac OS X Server - Setup Server.png).	
-	* Step through Server setup wizard:
-		 On the section "Connecting to your Server" make sure the "Network Address" (1) is set to a static IP and "Host Name" (2) is set to the domain that resolves to the static IP your configured.
-		 
-		![Screenshot 1.2 - Mac OS X Server - Network ](http://files.fmtricks.com/FileMaker-OpenDirectory/1.2 - Mac OS X Server - Network.png).
+	* Open your Applications folder, and double-click Server to begin setup.  
+    		![Screenshot 1.1 - Mac OS X Server - Setup Server ](http://files.fmtricks.com/FileMaker-OpenDirectory/1.1 - Mac OS X Server - Setup Server.png).	  	
+		* Step through Server setup wizard:
+			
+			On the section "Connecting to your Server" make sure the "Network Address" (1) is set to a static IP and "Host Name" (2) is set to the domain that resolves to the static IP your configured.
+			![Screenshot 1.2 - Mac OS X Server - Network ](http://files.fmtricks.com/FileMaker-OpenDirectory/1.2 - Mac OS X Server - Network.png).
 	
 ## Open Directory Configuration ##
 > ***— Static IP (required)***
@@ -48,6 +47,12 @@ FileMaker Pro Server ***must*** be installed on a Mac, as Windows based PCs are 
 	* Use the existing self-signed certificate.	
 		- ***OR***
 	* Use a third-party certificate, by clicking on the plus sign and generating a CSR for use with a truster SSL provider  – [OS X Server: Configuring clients to use SSL for Open Directory binding] (http://support.apple.com/kb/HT4183)
+	
+### Open Directory Users & Groups ###
+
+Now that you have a working Open Directory server, you will need to setup users and groups to use for authentication.
+
+
 9. You will need to setup Groups for Open Directory. Click on "Groups" under "ACCOUNTS". *[Screenshot: 
 2.5 - Open Directory Setup - Select Groups.png]*
 10. 
