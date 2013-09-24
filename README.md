@@ -17,20 +17,25 @@ FileMaker Pro Server ***must*** be installed on a Mac, as Windows based PCs are 
 ## 1. Mac OS X Server^1 ##
 >**OpenDirectory Server** ***(required)***
 
-> ***— The Open Directory server must have a static IP and a resolvable hostname.***
+>> ***The Open Directory server must have a static IP and a resolvable hostname.***
 
 >**FileMaker Pro Server** ***(optional)***
 
-1. Install Mountain Lion and update to the latest version. 
-2. If you are going to be using this machine as a Open Directory server, you will need to assign it a static IP and make sure it is using a reachable domain name.
-3. Install OS X Server
+1.	Install Mountain Lion and update to the latest version.
+
+
+2.	If you are going to be using this machine as an Open Directory server, you will need to assign it a static IP and make sure it is using a reachable domain name.
+
+
+3.	Install OS X Server
 	* Purchase and download Mac OS X Server from the Mac App Store
 	* Open your Applications folder, and double-click Server to begin setup.  
-    		![Screenshot 1.1 - Mac OS X Server - Setup Server ](http://files.fmtricks.com/FileMaker-OpenDirectory/1.1 - Mac OS X Server - Setup Server.png) 	
-		* Step through Server setup wizard:
-			
-			On the section "Connecting to your Server" make sure the "Network Address" (1) is set to a static IP and "Host Name" (2) is set to the domain that resolves to the static IP your configured.
-			![Screenshot 1.2 - Mac OS X Server - Network ](http://files.fmtricks.com/FileMaker-OpenDirectory/1.2 - Mac OS X Server - Network.png)
+		
+    ![Screenshot 1.1 - Mac OS X Server - Setup Server ](http://files.fmtricks.com/FileMaker-OpenDirectory/1.1 - Mac OS X Server - Setup Server.png) 	
+	* Step through Server setup wizard:
+			-	On the section "Connecting to your Server" make sure the "Network Address" (1) is set to a static IP and "Host Name" (2) is set to the domain that resolves to the static IP your configured.
+	
+	![Screenshot 1.2 - Mac OS X Server - Network ](http://files.fmtricks.com/FileMaker-OpenDirectory/1.2 - Mac OS X Server - Network.png)
 	
 ## Open Directory Configuration ##
 > ***— Static IP (required)***
