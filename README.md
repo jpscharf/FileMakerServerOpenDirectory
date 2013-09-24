@@ -81,7 +81,7 @@ Now that you have a working Open Directory server, you will need to setup users 
 6. You will need to bind the system to Open Directory, open **System Preferences** and select **Users & Groups**
 7. Unlock by clicking on the lock and entering your password.
 8. Click on **Network Account Server** and enter the name of the directory server.
-9. Reboot the machine.!!!!!! REQUIRED
+
 10. Add Access to admin console.
 
 ## FileMaker Pro File Setup^2 ##
