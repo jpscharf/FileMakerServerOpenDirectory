@@ -68,9 +68,13 @@ Now that you have a working Open Directory server, you will need to setup users 
 3. Now right-click the newly created user, and select "Edit User…"
 4. You can assign groups to a user by click in the plus "+" button (1), and then begin typing in the blank Groups line to get the option to browse (2), which will open the Groups floating window. To add groups to the user, just drag the group name into the user Groups list.
 
+--
 
+1. *Recommended:* Install Mac OS X Server on all the machines used, though it is optional for the FileMaker Pro Server machine.
+2. ***Required:*** Complete these steps for each FileMaker Pro database you want to authenticate through OpenDirectory.
 
 --
+# &darr; OLD — ORIGINAL - Used for Reference &darr; #
 --
 ## FileMaker Pro Server Setup
 1. Install FileMaker Server (preferably on a different machine).
@@ -92,8 +96,3 @@ Now that you have a working Open Directory server, you will need to setup users 
 4. Enter an Open Directory Group.
 5. Select a Privilege Set.
 6. Repeat steps 2-5 for each group you want to have access.
-
---
-
-1. *Recommended:* Install Mac OS X Server on all the machines used, though it is optional for the FileMaker Pro Server machine.
-2. ***Required:*** Complete these steps for each FileMaker Pro database you want to authenticate through OpenDirectory.
