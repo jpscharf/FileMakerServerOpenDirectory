@@ -55,7 +55,7 @@ FileMaker Pro Server ***must*** be installed on a Mac, as Windows based PCs are 
 		- ***OR***
 	* Use a third-party certificate, by clicking on the plus sign and generating a CSR for use with a truster SSL provider  – [OS X Server: Configuring clients to use SSL for Open Directory binding] (http://support.apple.com/kb/HT4183)
 	
-### Open Directory Users & Groups ###
+### Open Directory Users & Groups^3 ###
 
 Now that you have a working Open Directory server, you will need to setup users and groups to use for authentication.
 
@@ -77,6 +77,7 @@ Now that you have a working Open Directory server, you will need to setup users 
 
 1. *Recommended:* Install Mac OS X Server on all the machines used, though it is optional for the FileMaker Pro Server machine.
 2. ***Required:*** Complete these steps for each FileMaker Pro database you want to authenticate through OpenDirectory.
+3. *Recommended* You can download the workgroup manager from Apple [http://support.apple.com/kb/DL1567](http://support.apple.com/kb/DL1567)
 
 --
 # &darr; OLD — ORIGINAL - Used for Reference &darr; #
