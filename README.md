@@ -114,12 +114,12 @@ Each FileMaker database ***must have*** a local account with [Full Access], as a
 
 7. Click on "Set Up" to configure and enable Open Directory.
 
-8. Setup SSL Certificate, make sure that "Secure services using:" is set to your SSL certificate and **NOT** "Custom configuration".
+8. Setup SSL Certificate &#9312;, make sure that "Secure services using:" is set to your SSL certificate and **NOT** "Custom configuration".
 
 	![Screenshot 2.2 - Mac OS X Server - Setup SSL ](http://files.fmtricks.com/FileMaker-OpenDirectory/2.2 - Mac OS X Server - Setup SSL.png)
-	* Use the existing self-signed certificate.	
+	* Use the existing self-signed certificate &#9313;.	
 		- ***OR***
-	* Use a third-party certificate, by clicking on the plus sign and generating a CSR for use with a trusted SSL provider  – [OS X Server: Configuring clients to use SSL for Open Directory binding] (http://support.apple.com/kb/HT4183)
+	* Use a third-party certificate, by clicking on the plus sign &#9314; and generate a CSR for use with a trusted SSL provider  – [OS X Server: Configuring clients to use SSL for Open Directory binding] (http://support.apple.com/kb/HT4183)
 	
 ### Open Directory Users & Groups^2 ###
 
@@ -233,5 +233,4 @@ Now that you have a working Open Directory server, you will need to setup users 
 
 
 ## TODO: ##
-* Fix Image 2.8
 * Add a note about internal vs external networks when setting up Open Directory.
