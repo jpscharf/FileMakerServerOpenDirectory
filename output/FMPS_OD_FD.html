@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generated-by" content="Markdown PRO, http://markdownpro.com"/>
+<title></title>
+</head>
+<body>
+<h1>FileMaker Server + Open Directory</h1>
+
+<blockquote>
+<p><a href="https://github.com/jpscharf/FileMakerServerOpenDirectory">https://github.com/jpscharf/FileMakerServerOpenDirectory</a></p>
+</blockquote>
+
+<p>FileMaker Pro Server can be setup to authenticate against Active Directory and Open Directory. For those already using a Microsoft Server as a domain controller setup is little more than flipping a switch, while those on Mac only networks have to do a little more.</p>
+
+<p>FileMaker Pro Server and Open Directory can be integrated on either a single machine or across multiple machines. If you are following FileMaker Server best practices, Open Directory and FileMaker Pro Server should be installed on separate machines. The directions for either deployment are the same, except for on the single-machine deployment do all the steps on a single machine. <em>This tutorial assumes a two-machine deployment.</em></p>
+
+<h3>Caveats</h3>
+
+<p>FileMaker Pro Server <strong><em>must</em></strong> be installed on a Mac, as Windows based PCs are not able to bind to an Open Directory domain. Windows clients will still be able to authenticate, as authentication is processed through FileMaker Server Pro.</p>
+
+<p>Each FileMaker database <strong><em>must have</em></strong> a local account with [Full Access], as a Open Directory user with [Full Access] will not be able change security settings.</p>
+
+<h3>Requirements</h3>
+
+<ul>
+<li><a href="https://itunes.apple.com/us/app/id537386512?mt=12">Mac OS X Mountain Lion</a> (other versions may require a slightly different setup).</li>
+<li><a href="https://itunes.apple.com/us/app/id537441259?mt=12">OS X Server</a></li>
+<li><a href="http://www.filemaker.com/products/filemaker-server/">FileMaker Pro Server 12</a></li>
+</ul>
+
+<h2>0. Test Environment</h2>
+
+<h4>iMac 27-inch, Mid 2010</h4>
+
+<ul>
+<li><p>16GB RAM</p></li>
+<li><p>2.93 GHz Intel Core i7</p></li>
+</ul>
+
+<h4>VMware Fusion 5 Virtual Machines</h4>
+
+<ul>
+<li><p>Network/DNS Server</p>
+
+<ul>
+<li>Mountain Lion Server</li>
+<li>1 Processor Core</li>
+<li>2GB Ram</li>
+<li>Custom network connection (vmnet2, 192.168.36.0/255.255.255.0)</li>
+<li>Static IP: 192.168.36.3</li>
+<li>FQDN: door.local</li>
+</ul></li>
+<li><p>Open Directory Server</p>
+
+<ul>
+<li>Mountain Lion Server</li>
+<li>Open Directory</li>
+<li>1 Processor Core</li>
+<li>2GB Ram</li>
+<li>Custom network connection (vmnet2, 192.168.36.0/255.255.255.0)</li>
+<li>Static IP: 192.168.36.4</li>
+<li>FQDN: od.local</li>
+</ul></li>
+<li><p>FileMaker Pro Server</p>
+
+<ul>
+<li>FileMaker Pro Server Advanced 12</li>
+<li>2 Processor Cores</li>
+<li>4GB Ram</li>
+<li>Custom network connection (vmnet2, 192.168.36.0/255.255.255.0)</li>
+<li>DHCP</li>
+<li>FQDN: fmps.local</li>
+</ul></li>
+</ul>
+
+<h2>1. Mac OS X Server<sup>1</sup></h2>
+
+<blockquote>
+<p><strong>OpenDirectory Server</strong> <strong><em>(required)</em></strong></p>
+
+<blockquote>
+<p><strong><em>The Open Directory server must have a static IP and a resolvable hostname.</em></strong></p>
+</blockquote>
+
+<p><strong>FileMaker Pro Server</strong> <strong><em>(optional)</em></strong></p>
+</blockquote>
+
+<ol>
+<li><p>Install Mountain Lion and update to the latest version.</p></li>
+<li><p>If you are going to be using this machine as an Open Directory server, you will need to assign it a static IP and make sure it is using a reachable domain name.</p></li>
+<li><p>Install OS X Server</p>
+
+<ul>
+<li>Purchase and download Mac OS X Server from the Mac App Store</li>
+<li>Open your Applications folder, and double-click Server to begin setup.<br></li>
+</ul>
+
+<p><img src="http://files.fmtricks.com/FileMaker-OpenDirectory/1.1%20-%20Mac%20OS%20X%20Server%20-%20Setup%20Server.png" alt="Screenshot 1.1 - Mac OS X Server - Setup Server ">   </p>
+
+<ul>
+<li>On the second page of the Server setup wizard, &quot;Accessing your Server&quot; you will be given three options. If the sever is not going to be accessible from outside the local network, choose &quot;Local Network&quot;  &#9312;.</li>
+</ul>
+
+<p><img src="http://files.fmtricks.com/FileMaker-OpenDirectory/1.2%20-%20Mac%20OS%20X%20Server%20-%20Network%20Type.png" alt="1.2 - Mac OS X Server - Network Type"></p>
+
+<ul>
+<li>Step through Server setup wizard:
+    -   On the section &quot;Connecting to your Server&quot; make sure the &quot;Network Address&quot; &#9312; is set to a static IP and &quot;Host Name&quot; &#9313; is set to the domain that resolves to the static IP your configured.</li>
+</ul>
+
+<p><img src="http://files.fmtricks.com/FileMaker-OpenDirectory/1.3%20-%20Mac%20OS%20X%20Server%20-%20Host%20Name.png" alt="1.3 - Mac OS X Server - Host Name"></p></li>
+</ol>
+
+<h2>2. Open Directory Configuration</h2>
+
+<blockquote>
+<p><strong><em>— Static IP (required)</em></strong></p>
+
+<p><strong><em>— Resolvable DNS Name (required)</em></strong></p>
+</blockquote>
+
+<ol>
+<li>Open the &quot;Server&quot; application.</li>
+<li><p>Choose &quot;Open Directory&quot; under &quot;SERVICES&quot; section.</p>
+
+<p><img src="http://files.fmtricks.com/FileMaker-OpenDirectory/2.1%20-%20Open%20Directory%20Setup%20-%20Select%20Open%20Directory.png" alt="Screenshot 2.1 - Open Directory Setup - Select Open Directory"></p></li>
+<li><p>Start the Open Directory setup wizard by clicking on the OFF/ON toggle.</p></li>
+<li><p>Choose &quot;Create a new Open Directory domain&quot;, and click next.</p></li>
+<li><p>Enter the information for the Directory Administrator account, click next.</p></li>
+<li><p>Enter the organization name and the email address of the server administrator, click next.</p></li>
+<li><p>Click on &quot;Set Up&quot; to configure and enable Open Directory.</p></li>
+<li><p>Setup SSL Certificate &#9312;, make sure that &quot;Secure services using:&quot; is set to your SSL certificate and <strong>NOT</strong> &quot;Custom configuration&quot;.</p>
+
+<p><img src="http://files.fmtricks.com/FileMaker-OpenDirectory/2.2%20-%20Mac%20OS%20X%20Server%20-%20Setup%20SSL.png" alt="Screenshot 2.2 - Mac OS X Server - Setup SSL "></p>
+
+<ul>
+<li>Use the existing self-signed certificate &#9313;. 
+
+<ul>
+<li><strong><em>OR</em></strong></li>
+</ul></li>
+<li>Use a third-party certificate, by clicking on the plus sign &#9314; and generate a CSR for use with a trusted SSL provider  – <a href="http://support.apple.com/kb/HT4183">OS X Server: Configuring clients to use SSL for Open Directory binding</a></li>
+</ul></li>
+</ol>
+
+<h3>Open Directory Users &amp; Groups<sup>2</sup></h3>
+
+<p>Now that you have a working Open Directory server, you will need to setup users and groups to use for authentication.</p>
+
+<blockquote>
+<p>For more control over Users &amp; Groups you can download &quot;<a href="(http://support.apple.com/kb/DL1567">Workgroup Manager</a>&quot; directly from Apple.</p>
+</blockquote>
+
+<h4>Groups</h4>
+
+<ol>
+<li><p>Click on &quot;Groups&quot; &#9312; under &quot;ACCOUNTS&quot; and then choose &quot;Local Network Groups&quot; from the drop down menu &#9313;.</p>
+
+<p><img src="http://files.fmtricks.com/FileMaker-OpenDirectory/2.3%20-%20Open%20Directory%20Setup%20-%20Groups.png" alt="Screenshot 2.3 - Open Directory Setup - Groups"></p></li>
+<li><p>Click on the plus &quot;+&quot; button to create groups to control access to FileMaker databases.</p></li>
+</ol>
+
+<h4>Users</h4>
+
+<ol>
+<li><p>Click on &quot;Users&quot; &#9312; under &quot;ACCOUNTS&quot; and then choose &quot;Local Network Users&quot; from the drop down menu &#9313;.</p>
+
+<p><img src="http://files.fmtricks.com/FileMaker-OpenDirectory/2.4%20-%20Open%20Directory%20Setup%20-%20Users.png" alt="Screenshot 2.4 - Open Directory Setup - Users"></p></li>
+<li><p>Click on the plus &quot;+&quot; button to create a user, enter the users information and click &quot;Done&quot;.</p></li>
+<li><p>Now right-click the newly created user, and select &quot;Edit User…&quot;</p></li>
+<li><p>You can assign groups to a user by click in the plus &quot;+&quot; button (1), and then begin typing in the blank Groups line to get the option to browse (2), which will open the Groups floating window. To add groups to the user, just drag the group name into the user Groups list.</p></li>
+</ol>
+
+<h2>3. FileMaker Pro Server Configuration</h2>
+
+<h3>Bind to Open Directory</h3>
+
+<blockquote>
+<p>These steps only apply if the FileMaker and Open Directory servers are on separate machines.</p>
+</blockquote>
+
+<ol>
+<li><p>Open System Preferences, and select &quot;Users &amp; Groups&quot;.</p></li>
+<li><p>Click on &quot;Login Options&quot; &#9312;, then click on the lock &#9313;, and enter an administrator&#39;s credentials.</p>
+
+<p><img src="http://files.fmtricks.com/FileMaker-OpenDirectory/3.1%20-%20FileMaker%20Server%20-%20System%20Preferences.png" alt="3.1 - FileMaker Server - System Preferences"></p></li>
+<li><p>Click on &quot;Join…&quot; &#9312;, then click on the Server drop-down &#9313;. You should see your Open Directory server in the list, if you do not, enter the fully qualified domain (FQDN). Press enter to bind to the directory server.</p>
+
+<p><img src="http://files.fmtricks.com/FileMaker-OpenDirectory/3.2%20-%20FileMaker%20Server%20-%20Bind%20to%20Directory.png" alt="3.2 - FileMaker Server - Bind to Directory"></p></li>
+</ol>
+
+<h3>Configure FileMaker Server</h3>
+
+<ol>
+<li><p>Open the FileMaker Server Admin Console</p></li>
+<li><p>Click on &quot;Database Server&quot; &#9312;, choose &quot;Security&quot; &#9313;, change &quot;Client Authentication&quot; to &quot;FileMaker and external server accounts&quot; &#9314;, then click Save &#9315;.</p>
+
+<p><img src="http://files.fmtricks.com/FileMaker-OpenDirectory/3.3%20-%20FileMaker%20Server%20-%20Admin%20Console%20-%20Security.png" alt="3.3 - FileMaker Server - Admin Console - Security"></p></li>
+</ol>
+
+<h3>Optional FileMaker Server Configuration</h3>
+
+<ol>
+<li><p>Open Directory authentication may also be used to configure access to the FileMaker Server Admin Console. Click on &quot;Administrator Groups&quot; &#9312; click Add &#9313;. Configure the group.</p>
+
+<ul>
+<li>Click on &quot;Administrator Groups&quot; &#9312;</li>
+<li>Click Add &#9313;</li>
+<li>Enter &quot;Group Name&quot; &#9314;</li>
+<li>Enter &quot;Group Password&quot; &#9315; (required, but unused)</li>
+<li>Check &quot;Use external group&quot; &#9316;</li>
+<li>Enter Open Directory Group &#9317; to use for authentication.</li>
+<li>Click &quot;Test External Group&quot; &#9318;</li>
+<li>Click &quot;Select Folder&quot; &#9319; and choose a folder, if you would like to limit access to a specific folder.</li>
+<li>Click &quot;Edit Privileges&quot; &#9320;, if you would allow privileges beyond the default: View Databases, Send Messages and Disconnect Clients.</li>
+<li>Click Save &#9321;</li>
+</ul>
+
+<p><img src="http://files.fmtricks.com/FileMaker-OpenDirectory/3.4%20-%20FileMaker%20Server%20-%20Admin%20Console%20-%20Admin%20Groups.png" alt="3.4 - FileMaker Server - Admin Console - Admin Groups"></p></li>
+<li><p>Open Directory authentication may also be used to provide full access to the admin console.</p>
+
+<ul>
+<li>Click on &quot;General Setting&quot; &#9312;</li>
+<li>Check &quot;Use external group&quot; &#9313;</li>
+<li>Enter Open Directory Group &#9314; to use for authentication.</li>
+<li>Click &quot;Test External Group&quot; &#9315;</li>
+<li>Click Save &#9316;</li>
+</ul></li>
+</ol>
+
+<h2>4. FileMaker Pro Database Setup</h2>
+
+<blockquote>
+<p>To use Open Directory for authentication, the database must be hosted on a FileMaker Pro Server configured for Open Directory.</p>
+
+<p>Complete the following steps for each FileMaker Pro database you want to authenticate through OpenDirectory.</p>
+</blockquote>
+
+<ol>
+<li>Open database.</li>
+<li><p>Go to the menu File -&gt; Manage -&gt; Security</p>
+
+<p><img src="http://files.fmtricks.com/FileMaker-OpenDirectory/4.1%20-%20FileMaker%20Pro%20Database%20-%20Security.png" alt="4.1 - FileMaker Pro Database - Security"></p></li>
+<li><p>Add Open Directory Group Account</p>
+
+<ul>
+<li>Click &quot;New…&quot; &#9312;</li>
+<li>Select &quot;External Server&quot; from the &quot;Account is authenticated via&quot; menu &#9313;.</li>
+<li>For &quot;Group Name&quot; &#9314;, enter the Open Directory Group you would like to use for authentication.</li>
+<li>Select a &quot;Privilege Set&quot; &#9315;</li>
+<li>Click OK &#9316;</li>
+</ul>
+
+<p><img src="http://files.fmtricks.com/FileMaker-OpenDirectory/4.2%20-%20FileMaker%20Pro%20Database%20-%20Add%20Group.png" alt="4.2 - FileMaker Pro Database - Add Group"></p></li>
+</ol>
+
+<h3>Authentication Order</h3>
+
+<p><strong>The order matters, if a user has a FileMaker account and a OpenDirectory account, using the same username, the first account/group that accepts the provided username and password will be the one used.</strong></p>
+
+<ul>
+<li>Legacy local user &quot;localUser&quot; &#9312; [Full Access]</li>
+<li>New OD Group &quot;ODUserGroup&quot; &#9313; [Edit Only]</li>
+<li><p>&quot;localUser&quot; logs in with his old local password and is given [Full Access] even though he is in the group &quot;ODUserGroup&quot; and was expected to have [Edit Only] access.</p>
+
+<p><img src="http://files.fmtricks.com/FileMaker-OpenDirectory/4.3%20-%20FileMaker%20Pro%20Database%20-%20Authentication%20Order.png" alt="4.3 - FileMaker Pro Database - Authentication Order"></p></li>
+</ul>
+
+<h2></h2>
+
+<ol>
+<li><p><em>Recommended:</em> Install Mac OS X Server on all the machines used, though it is optional for the FileMaker Pro Server machine.</p></li>
+<li><p><em>Recommended:</em> Download Workgroup Manager from Apple <a href="http://support.apple.com/kb/DL1567">http://support.apple.com/kb/DL1567</a></p></li>
+</ol>
+
+</body>
+</html>
