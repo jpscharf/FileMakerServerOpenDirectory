@@ -6,13 +6,70 @@ FileMaker Pro Server can be setup to authenticate against Active Directory and O
 
 FileMaker Pro Server and Open Directory can be integrated on either a single machine or across multiple machines. If you are following FileMaker Server best practices, Open Directory and FileMaker Pro Server should be installed on separate machines. The directions for either deployment are the same, except for on the single-machine deployment do all the steps on a single machine. *This tutorial assumes a two-machine deployment.*
 
-### Caveat ###
+### Caveats ###
+
 FileMaker Pro Server ***must*** be installed on a Mac, as Windows based PCs are not able to bind to an Open Directory domain. Windows clients will still be able to authenticate, as authentication is processed through FileMaker Server Pro.
+
+Each FileMaker database ***must have*** a local account with [Full Access], as a Open Directory user with [Full Access] will not be able change security settings.
 
 ### Requirements ###
 * [Mac OS X Mountain Lion](https://itunes.apple.com/us/app/id537386512?mt=12) (other versions may require a slightly different setup).
 * [OS X Server](https://itunes.apple.com/us/app/id537441259?mt=12)
 * [FileMaker Pro Server 12](http://www.filemaker.com/products/filemaker-server/)
+
+## 0. Test Environment ##
+
+#### iMac 27-inch, Mid 2010 ####
+
+* 16GB RAM
+
+* 2.93 GHz Intel Core i7
+
+#### VMware Fusion 5 Virtual Machines ####
+
+* Network/DNS Server
+
+	* Mountain Lion Server
+	
+	* 1 Processor Core
+	
+	* 2GB Ram
+	
+	* Custom network connection (vmnet2, 192.168.36.0/255.255.255.0)
+	
+	* Static IP: 192.168.36.3
+	
+	* FQDN: door.local
+
+* Open Directory Server
+
+	* Mountain Lion Server
+	
+	* Open Directory
+	
+	* 1 Processor Core
+	
+	* 2GB Ram
+	
+	* Custom network connection (vmnet2, 192.168.36.0/255.255.255.0)
+	
+	* Static IP: 192.168.36.4
+	
+	* FQDN: od.local
+
+* FileMaker Pro Server
+	
+	* FileMaker Pro Server Advanced 12
+	
+	* 2 Processor Cores
+	
+	* 4GB Ram
+	
+	* Custom network connection (vmnet2, 192.168.36.0/255.255.255.0)
+	
+	* DHCP
+	
+	* FQDN: fmps.local
 
 ## 1. Mac OS X Server^1 ##
 >**OpenDirectory Server** ***(required)***
@@ -137,6 +194,36 @@ Now that you have a working Open Directory server, you will need to setup users 
 	* Enter Open Directory Group &#9314; to use for authentication.
 	* Click "Test External Group" &#9315;
 	* Click Save &#9316;
+
+## 4. FileMaker Pro Database Setup ##
+
+> To use Open Directory for authentication, the database must be hosted on a FileMaker Pro Server configured for Open Directory.
+
+> Complete the following steps for each FileMaker Pro database you want to authenticate through OpenDirectory.
+
+1. Open database.
+2. Go to the menu File -> Manage -> Security
+
+	![4.1 - FileMaker Pro Database - Security](http://files.fmtricks.com/FileMaker-OpenDirectory/4.1 - FileMaker Pro Database - Security.png)
+	
+3. Add Open Directory Group Account
+	* Click "New…" &#9312;
+	* Select "External Server" from the "Account is authenticated via" menu &#9313;.
+	* For "Group Name" &#9314;, enter the Open Directory Group you would like to use for authentication.
+	* Select a "Privilege Set" &#9315;
+	* Click OK &#9316;
+	
+	![4.2 - FileMaker Pro Database - Add Group](http://files.fmtricks.com/FileMaker-OpenDirectory/4.2 - FileMaker Pro Database - Add Group.png)
+
+### Authentication Order ###
+
+**The order matters, if a user has a FileMaker account and a OpenDirectory account, using the same username, the first account/group that accepts the provided username and password will be the one used.**
+
+* Legacy local user "localUser" &#9312; [Full Access]
+* New OD Group "ODUserGroup" &#9313; [Edit Only]
+* "localUser" logs in with his old local password and is given [Full Access] even though he is in the group "ODUserGroup" and was expected to have [Edit Only] access.
+
+	![4.3 - FileMaker Pro Database - Authentication Order](http://files.fmtricks.com/FileMaker-OpenDirectory/4.3 - FileMaker Pro Database - Authentication Order.png)
 	
 --
 
@@ -144,17 +231,7 @@ Now that you have a working Open Directory server, you will need to setup users 
 
 2. *Recommended:* Download Workgroup Manager from Apple [http://support.apple.com/kb/DL1567](http://support.apple.com/kb/DL1567)
 
-3. ***Required:*** Complete these steps for each FileMaker Pro database you want to authenticate through OpenDirectory.
 
---
-# &darr; OLD — ORIGINAL - Used for Reference &darr; #
---
-
-## FileMaker Pro File Setup^3 ##
-
-1. Go to File -> Manage -> Security
-2. Click on **New** to create a new account.
-3. Set *Account is authenticated via:* to **External Server**.
-4. Enter an Open Directory Group.
-5. Select a Privilege Set.
-6. Repeat steps 2-5 for each group you want to have access.
+## TODO: ##
+* Fix Image 2.8
+* Add a note about internal vs external networks when setting up Open Directory.
