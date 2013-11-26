@@ -79,7 +79,7 @@ Each FileMaker database ***must have*** a local account with [Full Access], as a
 		- ***OR***
 	* Use a third-party certificate, by clicking on the plus sign &#9314; and generate a CSR for use with a trusted SSL provider  – [OS X Server: Configuring clients to use SSL for Open Directory binding] (http://support.apple.com/kb/HT4183)
 	
-### Open Directory Users & Groups^2 ###
+### Open Directory Users & Groups ###
 
 Now that you have a working Open Directory server, you will need to setup users and groups to use for authentication.
 
@@ -186,5 +186,3 @@ Now that you have a working Open Directory server, you will need to setup users 
 --
 
 1. *Recommended:* Install Mac OS X Server on all the machines used, though it is optional for the FileMaker Server machine.
-
-2. *Recommended:* Download Workgroup Manager from Apple [http://support.apple.com/kb/DL1567](http://support.apple.com/kb/DL1567)
