@@ -7,7 +7,7 @@ FileMaker Server can be setup to authenticate against Active Directory and Open 
 FileMaker Server and Open Directory can be integrated on either a single machine or across multiple machines. If you are following FileMaker Server best practices, Open Directory and FileMaker Server should be installed on separate machines. The directions for either deployment are the same, except for on the single-machine deployment do all the steps on a single machine. *This tutorial assumes a two-machine deployment.*
 
 ### Caveats ###
-
+	
 FileMaker Server ***must*** be installed on a Mac, as Windows based PCs are not able to bind to an Open Directory domain. Windows clients will still be able to authenticate, as authentication is processed through FileMaker Server Pro.
 
 Each FileMaker database ***must have*** a local account with [Full Access], as a Open Directory user with [Full Access] will not be able change security settings.
@@ -64,7 +64,7 @@ Each FileMaker database ***must have*** a local account with [Full Access], as a
 
 4. Choose "Create a new Open Directory domain", and click next.
 
-5. Enter the information for the Directory Administrator account, click next. If you get an error regarding the hostname being invalid, you need to make sure the Open Directory server has a resolvable domain name.
+5. Enter the information for the Directory Administrator account, click next. If you get an error regarding the hostname being invalid, you need to make sure the Open Directory server has a resolvable domain name. You may need to check the PTR (reverse lookup) record to make sure it is configured correctly. (See troubleshooting section)
 
 	![2.2 - Open Directory Setup - Hostname Invalid](http://files.fmtricks.com/FileMaker-OpenDirectory/2.2 - Open Directory Setup - Hostname Invalid.png)
 
@@ -182,7 +182,14 @@ Now that you have a working Open Directory server, you will need to setup users 
 * "localUser" logs in with his old local password and is given [Full Access] even though he is in the group "ODUserGroup" and was expected to have [Edit Only] access.
 
 	![4.3 - FileMaker Pro Database - Authentication Order](http://files.fmtricks.com/FileMaker-OpenDirectory/4.3 - FileMaker Pro Database - Authentication Order.png)
+
+
+## 5. Troubleshooting ##
+
+**If you are getting an "invalid hostname" error, or are unable to connect to the Open Directory server using SSL:**
 	
+>Run the following command from terminal to check your configuration: ``` sudo changeip -checkhostname ```. The most common issue is that the domain lookup and reverse lookup (PTR record) do not match, you should contact your network administrator or internet provider.**
+
 --
 
 1. *Recommended:* Install Mac OS X Server on all the machines used, though it is optional for the FileMaker Server machine.
