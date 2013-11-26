@@ -1,4 +1,4 @@
-## Test Environment ##
+## FileMaker OpenDirectory Integration Test Environment ##
 
 #### iMac 27-inch, Mid 2010 ####
 
