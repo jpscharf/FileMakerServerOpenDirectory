@@ -192,6 +192,10 @@ Now that you have a working Open Directory server, you will need to setup users 
 	
 >Run the following command from terminal to check your configuration: ``` sudo changeip -checkhostname ```. The most common issue is that the domain lookup and reverse lookup (PTR record) do not match, you should contact your network administrator or internet provider.**
 
+**If you are unable to login with OpenDirectory Credentials**
+
+> On the FileMaker server, unbind and rebind to the OpenDirectory server in System Preferences -> Users & Groups -> Login Options.
+
 --
 
 1. *Recommended:* Install Mac OS X Server on all the machines used, though it is optional for the FileMaker Server machine.
