@@ -1,11 +1,1 @@
-{
-    "name": "FileMaker Server & OpenDirectory",
-    "version": "1.0.3",
-    "description": "Setup FileMaker Server to Authenticate against Apple Open Directory",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/jpscharf/FileMakerServerOpenDirectory/tree/gitbook"
-    },
-    "author": "Jason P. Scharf <jason.scharf@intergrated.net>",
-    "dependencies": {}
-}
+{}
